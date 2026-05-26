@@ -1,11 +1,11 @@
-from .schema import usercreate,userlogin,token
+from schema import usercreate,userlogin,token
 from jose import jwt,JWTError
 from fastapi import APIRouter,Depends,HTTPException
 from sqlalchemy.orm import Session
-from .config import secret_key,algo
-from .database import get_db
-from .model import User
-from .auth import hash_password,create_access_token,verify_password
+from config import secret_key,algo
+from database import get_db
+from model import User
+from auth import hash_password,create_access_token,verify_password
 from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
 routes = APIRouter()
 

@@ -1,7 +1,7 @@
 from datetime import timedelta,datetime
 from jose import jwt,JWTError
 from passlib.context import CryptContext
-from .config import secret_key,algo,time_to_expire
+from config import secret_key,algo,time_to_expire
 
 pwd_context = CryptContext( schemes=["argon2"],deprecated = "auto")
 
