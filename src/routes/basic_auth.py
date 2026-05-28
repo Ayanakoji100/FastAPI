@@ -24,6 +24,8 @@ async def register(user:usercreate,db:Session = Depends(get_db)):
     return {
         "Message":"User Created Successfully"
     }
+
+
 @auth.post('/login',response_model=token,tags =["Auth"])
 async def login(user:OAuth2PasswordRequestForm =Depends(),db:Session = Depends(get_db)):
     existing_user = db.query(User).filter(User.username == user.username).first()
@@ -31,11 +33,13 @@ async def login(user:OAuth2PasswordRequestForm =Depends(),db:Session = Depends(g
         raise HTTPException(status_code=400,detail = "user doesn't exists")
     if not verify_password(user.password,existing_user.password):
         raise HTTPException(status_code=400,detail = "Incorrect credentials")
-    access_token = create_access_token({"sub":existing_user.id,"role":existing_user.role})
+    access_token = create_access_token({"sub":str(existing_user.id),"role":existing_user.role})
     return {
         "access_token":access_token,
         "token_type":"bearer"
     }    
+
+
 @auth.get('/user',tags =["Auth"])
 async def get_user(payload = Depends(get_curr_user),db:Session = Depends(get_db)):
     try:

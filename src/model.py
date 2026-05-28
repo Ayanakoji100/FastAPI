@@ -19,7 +19,7 @@ class Product(Base):
     qty = Column(Integer)
     price = Column(Float)
 
-class Order(Base):
+class Orders(Base):
     
     __tablename__ = 'order'
     
